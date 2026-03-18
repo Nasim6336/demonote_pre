@@ -6,7 +6,7 @@ import { API_BASE_URL } from '../utils/apiConfig';
 export default function Layout({ children }) {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
-
+console.log(`in layout:${API_BASE_URL}/api/auth/logout`);
   const handleLogout = async () => {
     await fetch(`${API_BASE_URL}/api/auth/logout`, { method: 'POST' });
     setUser(null);
