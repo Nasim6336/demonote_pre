@@ -17,7 +17,7 @@ export default function Login() {
     e.preventDefault();
     setError('');
     setLoading(true);
-
+console.log(`full url for login : ${API_BASE_URL}/api/auth/login`);
     try {
       const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
