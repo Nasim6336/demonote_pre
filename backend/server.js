@@ -15,7 +15,7 @@ const app = express();
  
 app.use(cors({
   origin: 'https://demonote-pre.vercel.app', // Your actual Vercel URL
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
 
