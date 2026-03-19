@@ -8,22 +8,39 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  fetch(`${API_BASE_URL}/api/auth/me`, { 
-    credentials: 'include'
-  })
-    .then(res => {
-      if (!res.ok) throw new Error("Not authenticated");
-      return res.json();
-    })
-    .then(data => {
-      if (data.user) {
-        setUser(data.user);
+  const verifyUser = async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/auth/me`, { 
+        credentials: 'include' 
+      });
+
+      if (!res.ok) {
+        throw new Error("Unauthorized");
       }
-    })
-    .catch(() => {
-      setUser(null); // Ensure user is null if fetch fails
-    })
-    .finally(() => setLoading(false));
+
+      const data = await res.json();
+      
+      // DEBUG: Log this to see what your backend actually sends!
+      console.log("Auth Data:", data);
+
+      // Check if data is the user object itself or nested under .user
+      const userData = data.user || data; 
+      
+      if (userData && (userData.id || userData._id)) {
+        setUser(userData);
+      } else {
+        setUser(null);
+      }
+    } catch (error) {
+      console.error("Auth check failed:", error);
+      setUser(null);
+    } finally {
+      // Ensure this only happens AFTER we know the user status
+      setLoading(false);
+    }
+  };
+
+  verifyUser();
 }, []);
   return (
     <AuthContext.Provider value={{ user, setUser, loading }}>
