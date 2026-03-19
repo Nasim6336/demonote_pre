@@ -9,7 +9,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
   fetch(`${API_BASE_URL}/api/auth/me`, { 
-    credentials: 'include' // <--- INSERT THIS LINE
+    credentials: 'include' / <--- INSERT THIS LINE
   })
     .then(res => {
       if (!res.ok) throw new Error("Not authenticated");
