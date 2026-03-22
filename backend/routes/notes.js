@@ -50,6 +50,7 @@ router.post('/', authenticateToken, async (req, res) => {
 });
 
 router.put('/:id', authenticateToken, async (req, res) => {
+  console.log('in bcknd updt,route,notes');
   const { title, content, tags } = req.body;
   const noteId = req.params.id;
 
@@ -78,6 +79,7 @@ router.put('/:id', authenticateToken, async (req, res) => {
 });
 
 router.delete('/:id', authenticateToken, async (req, res) => {
+  console.log('in bcknd dlt,route,notes');
   const noteId = req.params.id;
 
   try {
