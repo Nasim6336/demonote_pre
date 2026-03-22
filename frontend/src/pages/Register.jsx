@@ -23,7 +23,7 @@ console.log(`register full url : ${API_BASE_URL}/api/auth/register`);
       const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, password }), credentials:'include'
       });
       const data = await res.json();
 
