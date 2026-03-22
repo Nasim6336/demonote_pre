@@ -57,8 +57,15 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
-  res.clearCookie('token');
-  res.json({ message: 'Logged out successfully' });
+  res.cookie('token', '', {
+    httpOnly: true,
+    expires: new Date(0),      // Force immediate expiration (Jan 1, 1970)
+    secure: true,              // Required for HTTPS/Production
+    sameSite: 'none',          // Required for Cross-Site (Vercel -> Render)
+    path: '/'                  // Ensure it clears for the whole domain
+  });
+
+  return res.status(200).json({ message: 'Logged out successfully' });
 });
 
 router.get('/me', authenticateToken, (req, res) => {
