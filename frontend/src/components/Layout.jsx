@@ -9,7 +9,7 @@ export default function Layout({ children }) {
 console.log(`in layout:${API_BASE_URL}/api/auth/logout`);
   const handleLogout = async () => {
   try {
-    // 1. Always use credentials: 'include' for cookie-based JWT
+
     const resp = await fetch(`${API_BASE_URL}/api/auth/logout`, {
       method: "POST",
       credentials: "include",
@@ -21,11 +21,11 @@ console.log(`in layout:${API_BASE_URL}/api/auth/logout`);
 
     console.log("Logout successful on server");
   } catch (error) {
-    // 2. Log the error for debugging, but don't stop the flow
+  
     console.error("Logout Error:", error.message);
   } finally {
-    // 3. CRITICAL: Clear local state regardless of server success
-    // If the server is down, we still want the user "logged out" locally
+   
+    
     setUser(null);
     navigate('/login'); 
   }
