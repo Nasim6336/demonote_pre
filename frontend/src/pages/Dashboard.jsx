@@ -15,18 +15,9 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { API_BASE_URL } from "../utils/apiConfig";
 
-/**
- * Dashboard Component
- *
- * Displays the main dashboard with a list of notes.
- * Features:
- * - List all notes with search and tag filtering
- * - Create new notes
- * - Edit and Delete existing notes
- * - Responsive layout
- */
+
 export default function Dashboard() {
-  // --- State Management ---
+  
 
   // Notes data and loading state
   const [notes, setNotes] = useState([]);
@@ -48,7 +39,7 @@ export default function Dashboard() {
   });
   const [saving, setSaving] = useState(false);
 
-  // --- Effects ---
+  // Effects
 
   // Fetch notes on component mount
   useEffect(() => {
@@ -85,7 +76,7 @@ export default function Dashboard() {
   }
 };
 
-  // --- Data Processing & Memos ---
+  // Data Processing & Memos
 
   /**
    * Extracts all unique tags from the notes list.
@@ -111,12 +102,9 @@ export default function Dashboard() {
     });
   }, [notes, searchQuery, selectedTag]);
 
-  // --- Event Handlers ---
 
-  /**
-   * Opens the Create/Edit modal.
-   * @param {Object|null} note - The note to edit, or null to create a new note.
-   */
+
+ 
   const handleOpenModal = (note) => {
     if (note) {
       setEditingNote(note);
@@ -216,7 +204,7 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      {/* --- Header Section --- */}
+      {/*Header Section */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-2xl font-bold text-slate-900">My Notes</h1>
         <button
@@ -228,7 +216,7 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* --- Search and Filter Section --- */}
+      {/* Search and Filter Section*/}
       <div className="flex flex-col sm:flex-row gap-4">
         {/* Search Input */}
         <div className="relative flex-1">
@@ -274,7 +262,7 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* --- Notes Grid Section --- */}
+      {/* Notes Grid Section  */}
       {filteredNotes.length === 0 ? (
         // Empty State
         <div className="text-center py-12 bg-white rounded-lg border border-slate-200 border-dashed">
@@ -351,7 +339,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* --- Create/Edit Note Modal --- */}
+      {/* Create/Edit Note Modal */}
       <AnimatePresence>
         {isModalOpen && (
           <div className="fixed inset-0 z-50 overflow-y-auto">
